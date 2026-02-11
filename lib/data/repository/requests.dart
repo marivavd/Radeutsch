@@ -14,3 +14,12 @@ Future<void> signUp({
   );
 
 }
+
+Future<void> signIn({
+  required String email,
+  required String password})async{
+  final AuthResponse res = await supabase.auth.signInWithPassword(
+    email: email,
+    password: password,
+  );
+}
