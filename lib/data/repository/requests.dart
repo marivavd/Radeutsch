@@ -1,3 +1,5 @@
+
+
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../main.dart';
@@ -22,4 +24,12 @@ Future<void> signIn({
     email: email,
     password: password,
   );
+}
+
+
+Future<List<Map<String, dynamic>>> get_groups()async{
+  final data = await supabase
+      .from('groups_of_words')
+      .select().eq("id_user", supabase.auth.currentUser!.id);
+  return data;
 }
