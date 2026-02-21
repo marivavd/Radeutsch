@@ -33,3 +33,25 @@ Future<List<Map<String, dynamic>>> get_groups()async{
       .select().eq("id_user", supabase.auth.currentUser!.id);
   return data;
 }
+
+Future<int> addNewGroup({
+  required String nameofGroup
+})async{
+  final data = await supabase
+      .from('groups_of_words')
+      .insert({'id_user': supabase.auth.currentUser!.id, 'group_name': nameofGroup}).select()
+      .single();
+  return data['id'];
+
+}
+
+
+Future<void> addNewWord({
+  required dynamic idOfGroup,
+  required String germanWord,
+  required String russianWord
+})async{
+  await supabase
+      .from('words')
+      .insert({'user_id': supabase.auth.currentUser!.id, 'word': germanWord, 'translate': russianWord, 'group_id': idOfGroup});
+}

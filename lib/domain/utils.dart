@@ -7,6 +7,7 @@ Future<void> requests<T>(
     )async{
   try{
     var response = await request();
+    print(response);
     onResponse(response);
   }
   on PostgrestException catch(e){
