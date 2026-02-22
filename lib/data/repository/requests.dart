@@ -8,7 +8,7 @@ Future<void> signUp({
   required String username,
   required String email,
   required String password})async{
-  final AuthResponse res = await supabase.auth.signUp(
+  final AuthResponse _ = await supabase.auth.signUp(
     email: email,
     password: password);
   await supabase.from('profiles').insert(
@@ -20,17 +20,44 @@ Future<void> signUp({
 Future<void> signIn({
   required String email,
   required String password})async{
-  final AuthResponse res = await supabase.auth.signInWithPassword(
+  final AuthResponse _ = await supabase.auth.signInWithPassword(
     email: email,
     password: password,
   );
 }
 
 
-Future<List<Map<String, dynamic>>> get_groups()async{
+Future<List<Map<String, dynamic>>> getGroups()async{
   final data = await supabase
       .from('groups_of_words')
       .select().eq("id_user", supabase.auth.currentUser!.id);
+  return data;
+}
+
+Future<void> deleteWords({
+  required int idGroup
+})async{
+  await supabase
+      .from('words')
+      .delete()
+      .eq('group_id', idGroup);
+}
+
+Future<void> deleteGroup({
+  required int idGroup
+})async{
+  await supabase
+      .from('groups_of_words')
+      .delete()
+      .eq('id', idGroup);
+}
+
+Future<List<Map<String, dynamic>>> getWords({
+  required int groupId
+})async{
+  final data = await supabase
+      .from('words')
+      .select().eq("group_id", groupId);
   return data;
 }
 

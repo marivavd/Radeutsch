@@ -31,3 +31,17 @@ void showLoading(BuildContext context)async{
           )
       ));
 }
+
+void showSureMessage(BuildContext context, String title, String message, Function() onPressed)async{
+  showDialog(context: context, builder: (_) => AlertDialog(
+    title: Text(title),
+    content: Text(message),
+    actions: [
+      TextButton(onPressed: (){
+        Navigator.of(context).pop();
+      }, child: Text('No')),
+      TextButton(onPressed: onPressed
+      , child: Text('Yes'))
+    ],
+  ));
+}
