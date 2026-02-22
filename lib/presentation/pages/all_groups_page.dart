@@ -14,6 +14,7 @@ class AllGroupsPage extends StatefulWidget {
 
 class _AllGroupsPageState extends State<AllGroupsPage> {
   List<GroupModel> spGroups = [];
+  bool isLoading = true;
   @override
   void initState() {
     super.initState();
@@ -27,10 +28,18 @@ class _AllGroupsPageState extends State<AllGroupsPage> {
 
     setState(() {
       spGroups = data;
+      isLoading = false;
     });
   }
   @override
   Widget build(BuildContext context) {
+    if (isLoading) {
+      return const Scaffold(
+        body: Center(
+          child: CircularProgressIndicator(),
+        ),
+      );
+    }
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: Padding(
@@ -62,8 +71,19 @@ class _AllGroupsPageState extends State<AllGroupsPage> {
                       itemCount: spGroups.length,
 
                       itemBuilder: (context, index) {
-                        return FilledButton(onPressed: (){
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => GroupPage(group: spGroups[index],))).then((value) => setState(() {}));
+                        return FilledButton(onPressed: ()async{
+                          final result = await Navigator.push<bool>(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => GroupPage(group: spGroups[index]),
+                            ),
+                          );
+
+
+                          if (result == true) {
+                            setState(() => isLoading = true);
+                            await loadGroups();
+                          }
                         },
                           style: FilledButton.styleFrom(
                             backgroundColor: Colors.white,

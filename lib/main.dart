@@ -1,6 +1,4 @@
-import 'package:deutscht/presentation/pages/main_page.dart';
 import 'package:deutscht/presentation/pages/sign_in_page.dart';
-import 'package:deutscht/presentation/pages/sign_up_page.dart';
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -27,6 +25,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Radeutsch',
       home: SignInPage(),
+      theme: ThemeData(
+        colorScheme: .fromSeed(seedColor: Colors.blue),
+      ),
 
     );
   }

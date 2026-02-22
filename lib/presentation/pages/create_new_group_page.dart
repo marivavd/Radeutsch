@@ -1,5 +1,6 @@
 import 'package:deutscht/domain/use_case_add_word.dart';
 import 'package:deutscht/presentation/pages/main_page.dart';
+import 'package:deutscht/presentation/widgets/container_of_word.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -35,11 +36,12 @@ class _CreateNewGroupPageState extends State<CreateNewGroupPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: EdgeInsetsGeometry.symmetric(horizontal: 25, vertical: 40),
+        padding: EdgeInsetsGeometry.symmetric(horizontal: 25),
         child: Center(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              SizedBox(height: 40,),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [SizedBox(
@@ -95,7 +97,7 @@ class _CreateNewGroupPageState extends State<CreateNewGroupPage> {
                 ]
               ),
               Text(
-                      'Name of a group',
+                      'Name of a list',
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.w400
@@ -219,26 +221,52 @@ class _CreateNewGroupPageState extends State<CreateNewGroupPage> {
                           ],
                         ),
                         SizedBox(height: 14,),
-                        SizedBox(
-                          height: 40,
-                          width: double.infinity,
-                          child: FilledButton(
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
 
-                              onPressed: (isValid)?(){
-                                setState(() {
-                                  slWords[germanWord.text] = russianWord.text;
-                                  germanWord.clear();
-                                  russianWord.clear();
-                                  isValid = false;
-                                });
-                              }:null,
-                              style: FilledButton.styleFrom(
-                                  backgroundColor: Colors.blue
-                              ),
-                              child: Text(
-                                  "Add vocabulary"
-                              )),
-                        ),
+                          children: [
+                            SizedBox(
+                              height: 40,
+
+                              child: FilledButton(
+
+                                  onPressed: (isValid)?(){
+                                    setState(() {
+                                      slWords[germanWord.text] = russianWord.text;
+                                      germanWord.clear();
+                                      russianWord.clear();
+                                      isValid = false;
+                                    });
+                                  }:null,
+                                  style: FilledButton.styleFrom(
+                                      backgroundColor: Colors.blue
+                                  ),
+                                  child: Text(
+                                      "Add word"
+                                  )),
+                            ),
+                            SizedBox(width: 5,),
+                            SizedBox(
+                              height: 40,
+
+                              child: FilledButton(
+
+                                  onPressed: (){
+                                    setState(() {
+                                      germanWord.clear();
+                                      russianWord.clear();
+                                      isValid = false;
+                                    });
+                                  },
+                                  style: FilledButton.styleFrom(
+                                      backgroundColor: Colors.blue
+                                  ),
+                                  child: Text(
+                                      "Delete word"
+                                  )),
+                            ),
+                          ],
+                        )
 
                       ],
                     ),
@@ -250,63 +278,14 @@ class _CreateNewGroupPageState extends State<CreateNewGroupPage> {
                       separatorBuilder: (_, __) => const SizedBox(height: 15),
 
                       itemBuilder: (context, index) {
-                        return Container(
-                          height: 94,
-                          width: double.infinity,
-                          padding: EdgeInsets.all(10),
-                          decoration: BoxDecoration(
-                            border: Border.all(color: Colors.grey),
-                            borderRadius: BorderRadius.circular(6)
-                          ),
-                          child: Row(
-                            children: [
-                              Expanded(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      slWords.keys.toList()[index],
-                                      style: const TextStyle(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.w400,
-                                      ),
-                                    ),
-
-                                    const SizedBox(height: 6),
-
-                                    Container(
-                                      height: 1.5,
-                                      width: double.infinity,
-                                      color: Colors.blue,
-                                    ),
-
-                                    const SizedBox(height: 6),
-
-                                    Text(
-                                      slWords[slWords.keys.toList()[index]] ?? "",
-                                      style: const TextStyle(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.w400,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-
-                              IconButton(
-                                onPressed: () {
-                                  setState(() {
-                                    germanWord.text = slWords.keys.toList()[index];
-                                    russianWord.text = slWords[slWords.keys.toList()[index]] ?? "";
-                                    slWords.remove(slWords.keys.toList()[index]);
-                                    isValid = true;
-                                  });
-                                },
-                                icon: const Icon(Icons.edit, color: Colors.blue,),
-                              ),
-                            ],
-                          )
-                        );
+                        return WordContainer(word: slWords.keys.toList()[index], translate: slWords[slWords.keys.toList()[index]] ?? "", isEdit: true, onPressed: () {
+                          setState(() {
+                            germanWord.text = slWords.keys.toList()[index];
+                            russianWord.text = slWords[slWords.keys.toList()[index]] ?? "";
+                            slWords.remove(slWords.keys.toList()[index]);
+                            isValid = true;
+                          });
+                        });
                       }
                   )
               ),
