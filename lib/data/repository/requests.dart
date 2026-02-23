@@ -30,7 +30,7 @@ Future<void> signIn({
 Future<List<Map<String, dynamic>>> getGroups()async{
   final data = await supabase
       .from('groups_of_words')
-      .select().eq("id_user", supabase.auth.currentUser!.id);
+      .select().eq("id_user", supabase.auth.currentUser!.id).order('created_at', ascending: false);;
   return data;
 }
 
@@ -59,6 +59,16 @@ Future<List<Map<String, dynamic>>> getWords({
       .from('words')
       .select().eq("group_id", groupId);
   return data;
+}
+
+
+Future<void> changeNameOfGroup({
+  required int idOfGroup,
+  required String nameOfGroup
+})async{
+  await supabase
+      .from('groups_of_words')
+      .update({'group_name': nameOfGroup }).eq("id", idOfGroup);
 }
 
 Future<int> addNewGroup({

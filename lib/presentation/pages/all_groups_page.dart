@@ -95,6 +95,7 @@ class _AllGroupsPageState extends State<AllGroupsPage> {
                           child: Text(
                             spGroups[index].groupName,
                             overflow: TextOverflow.ellipsis,
+                            maxLines: 1,
                             style: TextStyle(
                               fontSize: 20,
                               color: Colors.black87,

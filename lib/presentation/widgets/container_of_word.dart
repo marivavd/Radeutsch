@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 class WordContainer extends StatelessWidget {
 
@@ -27,7 +28,17 @@ class WordContainer extends StatelessWidget {
                       mainAxisSize: MainAxisSize.min,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
+                        Row(
+                        children:[
+                          ClipOval(
+                              child: SizedBox(
+                                child: SvgPicture.asset("assets/Flag_of_Germany.svg", fit: BoxFit.cover, ),
+                                height: 20,
+                                width: 20,
+                              )
+                          ),
+                        SizedBox(width: 10,),
+                        Expanded(child: Text(
                           word,
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
@@ -35,9 +46,9 @@ class WordContainer extends StatelessWidget {
                             fontSize: 20,
                             fontWeight: FontWeight.w400,
                           ),
-                        ),
+                        )),]),
 
-                        const SizedBox(height: 6),
+                         SizedBox(height: 6),
 
                         Container(
                           height: 1.5,
@@ -46,8 +57,18 @@ class WordContainer extends StatelessWidget {
                         ),
 
                         const SizedBox(height: 6),
+                        Row(
+                        children: [
+                          ClipOval(
 
-                        Text(
+                              child: SizedBox(
+                                child: SvgPicture.asset("assets/Flag_of_Russia.svg", fit: BoxFit.cover,),
+                                height: 20,
+                                width: 20,
+                              )
+                          ),
+                        SizedBox(width: 10,),
+                        Expanded(child: Text(
                           translate,
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
@@ -55,9 +76,9 @@ class WordContainer extends StatelessWidget {
                             fontSize: 20,
                             fontWeight: FontWeight.w400,
                           ),
-                        ),
+                        ),)
                       ],
-                    ),
+                    ),])
                   ),
 
                   (isEdit)?IconButton(

@@ -6,6 +6,7 @@ import 'package:deutscht/presentation/pages/card_of_word.dart';
 import 'package:deutscht/presentation/pages/edit_group_name_page.dart';
 import 'package:deutscht/presentation/pages/edit_words_page.dart';
 import 'package:deutscht/presentation/pages/learn_words_page.dart';
+import 'package:deutscht/presentation/pages/main_page.dart';
 import 'package:deutscht/presentation/utils/show_dialogs.dart';
 import 'package:deutscht/presentation/widgets/container_of_word.dart';
 import 'package:flutter/material.dart';
@@ -73,7 +74,13 @@ class _GroupPageState extends State<GroupPage> {
                     width: 40,
                     child: OutlinedButton(
                       onPressed: (){
-                        Navigator.of(context).pop();
+
+                        if (!mounted) return;
+
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(builder: (_) => MyHomePage()),
+                        );
                         },
                       child: Icon(Icons.arrow_back, color: Colors.black87,),
                       style: OutlinedButton.styleFrom(
@@ -136,9 +143,9 @@ class _GroupPageState extends State<GroupPage> {
                 SizedBox(
                   width: 40,
                   child: OutlinedButton(
-                    onPressed: (){
+                    onPressed: ()async{
                       Navigator.push(context, MaterialPageRoute(builder: (context) => EditGroupNamePage(group: widget.group))).then((value) => setState(() {}));
-
+                      
                     },
                     child: Icon(Icons.edit, color: Colors.black87,size: 30,),
                     style: OutlinedButton.styleFrom(

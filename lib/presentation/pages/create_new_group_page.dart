@@ -25,6 +25,7 @@ class _CreateNewGroupPageState extends State<CreateNewGroupPage> {
   bool isEdited = false;
   String oldGermanWord = '';
   String oldRussianWord = '';
+  bool isValidName = false;
 
 
 
@@ -32,6 +33,12 @@ class _CreateNewGroupPageState extends State<CreateNewGroupPage> {
   void onChange(_){
     setState(() {
       isValid = germanWord.text.trim().isNotEmpty && russianWord.text.trim().isNotEmpty;
+    });
+  }
+
+  void onChangeName(_){
+    setState(() {
+      isValidName = nameGroup.text.trim().isNotEmpty;
     });
   }
 
@@ -58,7 +65,7 @@ class _CreateNewGroupPageState extends State<CreateNewGroupPage> {
                     },
                     child: Icon(Icons.arrow_back, color: Colors.black87,),
                     style: OutlinedButton.styleFrom(
-                      padding: EdgeInsets.all(5)
+                      padding: EdgeInsets.all(5),
                     ),
                   ),
                 ),
@@ -70,7 +77,7 @@ class _CreateNewGroupPageState extends State<CreateNewGroupPage> {
                         style: FilledButton.styleFrom(
                             backgroundColor: Colors.blue
                         ),
-                        onPressed: (nameGroup.text.isNotEmpty)?()async{
+                        onPressed: (isValidName)?()async{
                           showLoading(context);
                           GroupUseCase.pressButtonDone(nameGroup.text,
                                   (idGroup){
@@ -113,9 +120,10 @@ class _CreateNewGroupPageState extends State<CreateNewGroupPage> {
                     height: 40,
                     child: TextField(
                         controller: nameGroup,
-                        onChanged: onChange,
+                        onChanged: onChangeName,
                         style: TextStyle(color: Color(0xFF3A3A3A), fontSize: 14, height: 16/14, fontWeight: FontWeight.w500),
                         decoration: InputDecoration(
+                          hintText: "List",
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(6),
                             borderSide: BorderSide(color: Colors.grey),
