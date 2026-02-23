@@ -6,7 +6,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 Future<void> main() async {
   await Supabase.initialize(
     url: 'https://mhdudqozculuggkraetf.supabase.co',
-    anonKey: 'sb_publishable_p5vfORtlC_SO_8r3_uzuQg_nkf-M5cD',
+    anonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1oZHVkcW96Y3VsdWdna3JhZXRmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjU4MTI5MDYsImV4cCI6MjA4MTM4ODkwNn0.MuM41INdxf_ERaWXkz1ZSYnlfzLBbvkUBLsEFvetdqE',
   );
 
   runApp(MyApp());
