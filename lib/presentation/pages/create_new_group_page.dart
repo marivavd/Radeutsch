@@ -22,13 +22,16 @@ class _CreateNewGroupPageState extends State<CreateNewGroupPage> {
   Map<String, String> slWords = {};
   AddNewGroupUseCase GroupUseCase = AddNewGroupUseCase();
   AddNewWordUseCase WordUseCase = AddNewWordUseCase();
+  bool isEdited = false;
+  String oldGermanWord = '';
+  String oldRussianWord = '';
 
 
 
 
   void onChange(_){
     setState(() {
-      isValid = germanWord.text.isNotEmpty && russianWord.text.isNotEmpty;
+      isValid = germanWord.text.trim().isNotEmpty && russianWord.text.trim().isNotEmpty;
     });
   }
 
@@ -257,10 +260,13 @@ class _CreateNewGroupPageState extends State<CreateNewGroupPage> {
 
                                   onPressed: (isValid)?(){
                                     setState(() {
-                                      slWords[germanWord.text] = russianWord.text;
+                                      slWords[germanWord.text.trim()] = russianWord.text.trim();
                                       germanWord.clear();
                                       russianWord.clear();
                                       isValid = false;
+                                      oldRussianWord = '';
+                                      oldGermanWord = '';
+                                      isEdited = false;
                                       FocusScope.of(context).unfocus();
                                     });
                                   }:null,
@@ -268,7 +274,7 @@ class _CreateNewGroupPageState extends State<CreateNewGroupPage> {
                                       backgroundColor: Colors.blue
                                   ),
                                   child: Text(
-                                      "Add word"
+                                      (isEdited)?"Edit word":"Add word"
                                   )),
                             ),
 
@@ -290,10 +296,16 @@ class _CreateNewGroupPageState extends State<CreateNewGroupPage> {
                       itemBuilder: (context, index) {
                         return WordContainer(word: slWords.keys.toList()[index], translate: slWords[slWords.keys.toList()[index]] ?? "", isEdit: true, onPressed: () {
                           setState(() {
+                            if (isEdited){
+                              slWords[oldGermanWord] = oldRussianWord;
+                            }
                             germanWord.text = slWords.keys.toList()[index];
                             russianWord.text = slWords[slWords.keys.toList()[index]] ?? "";
                             slWords.remove(slWords.keys.toList()[index]);
                             isValid = true;
+                            isEdited = true;
+                            oldGermanWord = germanWord.text;
+                            oldRussianWord = russianWord.text;
                           });
                         });
                       }
