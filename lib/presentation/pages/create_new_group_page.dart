@@ -34,7 +34,9 @@ class _CreateNewGroupPageState extends State<CreateNewGroupPage> {
 
   @override
   Widget build(BuildContext context) {
+    final keyboardOpen = MediaQuery.of(context).viewInsets.bottom != 0;
     return Scaffold(
+
       body: Padding(
         padding: EdgeInsetsGeometry.symmetric(horizontal: 25),
         child: Center(
@@ -197,6 +199,7 @@ class _CreateNewGroupPageState extends State<CreateNewGroupPage> {
                             ),
                             SizedBox(width: 10,),
                             Expanded(
+
                               child: SizedBox(
                                 height: 40,
                                 child: TextField(
@@ -225,6 +228,28 @@ class _CreateNewGroupPageState extends State<CreateNewGroupPage> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
 
                           children: [
+
+                            SizedBox(
+                              height: 40,
+
+                              child: FilledButton(
+
+                                  onPressed: (){
+                                    setState(() {
+                                      germanWord.clear();
+                                      russianWord.clear();
+                                      isValid = false;
+                                      FocusScope.of(context).unfocus();
+                                    });
+                                  },
+                                  style: FilledButton.styleFrom(
+                                      backgroundColor: Colors.blue
+                                  ),
+                                  child: Text(
+                                      "Delete word"
+                                  )),
+                            ),
+                            SizedBox(width: 5,),
                             SizedBox(
                               height: 40,
 
@@ -236,6 +261,7 @@ class _CreateNewGroupPageState extends State<CreateNewGroupPage> {
                                       germanWord.clear();
                                       russianWord.clear();
                                       isValid = false;
+                                      FocusScope.of(context).unfocus();
                                     });
                                   }:null,
                                   style: FilledButton.styleFrom(
@@ -245,35 +271,19 @@ class _CreateNewGroupPageState extends State<CreateNewGroupPage> {
                                       "Add word"
                                   )),
                             ),
-                            SizedBox(width: 5,),
-                            SizedBox(
-                              height: 40,
 
-                              child: FilledButton(
-
-                                  onPressed: (){
-                                    setState(() {
-                                      germanWord.clear();
-                                      russianWord.clear();
-                                      isValid = false;
-                                    });
-                                  },
-                                  style: FilledButton.styleFrom(
-                                      backgroundColor: Colors.blue
-                                  ),
-                                  child: Text(
-                                      "Delete word"
-                                  )),
-                            ),
                           ],
                         )
 
                       ],
                     ),
               ),
-              SizedBox(height: 5,),
+              SizedBox(height: 15,),
               Expanded(
                   child: ListView.separated(
+                      physics: keyboardOpen
+                          ? const NeverScrollableScrollPhysics()
+                          : const BouncingScrollPhysics(),
                       itemCount: slWords.length,
                       separatorBuilder: (_, __) => const SizedBox(height: 15),
 

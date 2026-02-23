@@ -106,6 +106,7 @@ class _AllGroupsPageState extends State<AllGroupsPage> {
                       }
                   )
               ),
+              SizedBox(height: 10,)
 
 
 
