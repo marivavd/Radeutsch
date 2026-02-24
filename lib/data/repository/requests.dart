@@ -92,3 +92,14 @@ Future<void> addNewWord({
       .from('words')
       .insert({'user_id': supabase.auth.currentUser!.id, 'word': germanWord, 'translate': russianWord, 'group_id': idOfGroup});
 }
+
+Future<void> updateWord({
+  required dynamic idOfWord,
+  required String germanWord,
+  required String russianWord
+})async{
+  await supabase
+      .from('words')
+      .update({'word': germanWord, 'translate': russianWord})
+      .eq('id', idOfWord);
+}
