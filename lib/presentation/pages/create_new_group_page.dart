@@ -30,6 +30,7 @@ class _CreateNewGroupPageState extends State<CreateNewGroupPage> {
 
 
 
+
   void onChange(_){
     setState(() {
       isValid = germanWord.text.trim().isNotEmpty && russianWord.text.trim().isNotEmpty;
@@ -46,6 +47,7 @@ class _CreateNewGroupPageState extends State<CreateNewGroupPage> {
   Widget build(BuildContext context) {
     final keyboardOpen = MediaQuery.of(context).viewInsets.bottom != 0;
     return Scaffold(
+
 
       body: Padding(
         padding: EdgeInsetsGeometry.symmetric(horizontal: 25),
@@ -124,6 +126,8 @@ class _CreateNewGroupPageState extends State<CreateNewGroupPage> {
                         style: TextStyle(color: Color(0xFF3A3A3A), fontSize: 14, height: 16/14, fontWeight: FontWeight.w500),
                         decoration: InputDecoration(
                           hintText: "List",
+                          hintStyle: TextStyle(color: Colors.grey),
+
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(6),
                             borderSide: BorderSide(color: Colors.grey),
@@ -181,6 +185,9 @@ class _CreateNewGroupPageState extends State<CreateNewGroupPage> {
                                   onChanged: onChange,
                                   style: TextStyle(color: Color(0xFF3A3A3A), fontSize: 14, height: 16/14, fontWeight: FontWeight.w500),
                                   decoration: InputDecoration(
+                                      hintText: "Vocabulary in German",
+                                    hintStyle: TextStyle(color: Colors.grey),
+
                                     border: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(6),
                                       borderSide: BorderSide(color: Colors.grey),
@@ -192,7 +199,7 @@ class _CreateNewGroupPageState extends State<CreateNewGroupPage> {
                                     focusedBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(6),
                                       borderSide: BorderSide(color: Colors.blue),),
-                                    contentPadding: EdgeInsets.symmetric(vertical: 14, horizontal: 10),
+                                    contentPadding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
                                   )
                               ),),)
                           ],
@@ -218,6 +225,8 @@ class _CreateNewGroupPageState extends State<CreateNewGroupPage> {
                                     onChanged: onChange,
                                     style: TextStyle(color: Color(0xFF3A3A3A), fontSize: 14, height: 16/14, fontWeight: FontWeight.w500),
                                     decoration: InputDecoration(
+                                      hintText: 'Vocabulary in Russian',
+                                      hintStyle: TextStyle(color: Colors.grey),
                                       border: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(6),
                                         borderSide: BorderSide(color: Colors.grey),
@@ -229,7 +238,7 @@ class _CreateNewGroupPageState extends State<CreateNewGroupPage> {
                                       focusedBorder: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(6),
                                         borderSide: BorderSide(color: Colors.blue),),
-                                      contentPadding: EdgeInsets.symmetric(vertical: 14, horizontal: 10),
+                                      contentPadding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
                                     )
                                 ),),)
                           ],
@@ -268,7 +277,7 @@ class _CreateNewGroupPageState extends State<CreateNewGroupPage> {
 
                                   onPressed: (isValid)?(){
                                     setState(() {
-                                      slWords[germanWord.text.trim()] = russianWord.text.trim();
+                                      slWords = {germanWord.text.trim(): russianWord.text.trim(), ...slWords};
                                       germanWord.clear();
                                       russianWord.clear();
                                       isValid = false;
@@ -304,12 +313,14 @@ class _CreateNewGroupPageState extends State<CreateNewGroupPage> {
                       itemBuilder: (context, index) {
                         return WordContainer(word: slWords.keys.toList()[index], translate: slWords[slWords.keys.toList()[index]] ?? "", isEdit: true, onPressed: () {
                           setState(() {
-                            if (isEdited){
-                              slWords[oldGermanWord] = oldRussianWord;
-                            }
+
                             germanWord.text = slWords.keys.toList()[index];
                             russianWord.text = slWords[slWords.keys.toList()[index]] ?? "";
+
                             slWords.remove(slWords.keys.toList()[index]);
+                            if (isEdited){
+                              slWords = {oldGermanWord: oldRussianWord, ...slWords};
+                            }
                             isValid = true;
                             isEdited = true;
                             oldGermanWord = germanWord.text;

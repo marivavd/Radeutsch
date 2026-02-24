@@ -217,7 +217,7 @@ class _GroupPageState extends State<GroupPage> {
                               backgroundColor: Colors.blue.shade400
                           ),
                           onPressed: (){
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => EditWordsPage(spWords:spWords,))).then((value) => setState(() {}));
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => EditWordsPage(spWords:spWords, group: widget.group))).then((value) => setState(() {}));
                           },
                           child: Text(
                             "Edit",
