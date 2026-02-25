@@ -77,7 +77,7 @@ class _SignInPageState extends State<SignInPage> {
                           ),
                           focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(6),
-                            borderSide: BorderSide(color: Colors.blue),),
+                            borderSide: BorderSide(color: Color(0xFF5AB6F4)),),
                           contentPadding: EdgeInsets.symmetric(vertical: 14, horizontal: 10),
                         )
                     ),
@@ -114,7 +114,7 @@ class _SignInPageState extends State<SignInPage> {
                             ),
                             focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(6),
-                              borderSide: BorderSide(color: Colors.blue),),
+                              borderSide: BorderSide(color: Color(0xFF5AB6F4)),),
                             contentPadding: EdgeInsets.symmetric(vertical: 14, horizontal: 10),
                             suffixIconConstraints: const BoxConstraints(minWidth: 34),
                             suffixIcon:
@@ -165,7 +165,7 @@ class _SignInPageState extends State<SignInPage> {
 
                       }:null,
                       style: FilledButton.styleFrom(
-                          backgroundColor: Colors.blue
+                          backgroundColor: Color(0xFF5AB6F4)
                       ),
                       child: Text(
                           "Sign In"
@@ -188,7 +188,7 @@ class _SignInPageState extends State<SignInPage> {
                     },
                     child: Text(
                       'Sign Up',
-                      style: Theme.of(context).textTheme.titleMedium?.copyWith(color: Color(0xFF0560FA)),
+                      style: Theme.of(context).textTheme.titleMedium?.copyWith(color: Color(0xFF5AB6F4)),
                     ),
                   )
 

@@ -35,12 +35,14 @@ class _AllGroupsPageState extends State<AllGroupsPage> {
   Widget build(BuildContext context) {
     if (isLoading) {
       return const Scaffold(
+        backgroundColor: Color(0xFFA2D6F9),
         body: Center(
           child: CircularProgressIndicator(),
         ),
       );
     }
     return Scaffold(
+      backgroundColor: Color(0xFFEAF6FF),
       resizeToAvoidBottomInset: false,
       body: Padding(
         padding: EdgeInsetsGeometry.symmetric(horizontal: 20),
@@ -89,7 +91,7 @@ class _AllGroupsPageState extends State<AllGroupsPage> {
                             backgroundColor: Colors.white,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(30),
-                              side: BorderSide(color: Colors.grey, width: 2)
+                              side: BorderSide(color: Color(0xFF5AB6F4), width: 2)
                             ),
                           ),
                           child: Text(
@@ -98,7 +100,7 @@ class _AllGroupsPageState extends State<AllGroupsPage> {
                             maxLines: 1,
                             style: TextStyle(
                               fontSize: 20,
-                              color: Colors.black87,
+                              color: Color(0xFF5AB6F4),
                               fontWeight: FontWeight.w400,
                             ),
                           ),
@@ -117,7 +119,7 @@ class _AllGroupsPageState extends State<AllGroupsPage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-          backgroundColor: Colors.blue,
+          backgroundColor: Color(0xFF5AB6F4),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(30),
           ),

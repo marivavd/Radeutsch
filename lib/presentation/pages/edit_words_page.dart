@@ -57,92 +57,74 @@ class _EditWordsPageState extends State<EditWordsPage> {
   Widget build(BuildContext context) {
     final keyboardOpen = MediaQuery.of(context).viewInsets.bottom != 0;
     return Scaffold(
-      backgroundColor: Colors.blue,
+      backgroundColor: Color(0xFFA2D6F9),
       body: Padding(
           padding: EdgeInsetsGeometry.symmetric(horizontal: 25),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(height: 40,),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(
+            Align(
+              alignment: AlignmentGeometry.topLeft,
+                child: SizedBox(
                   width: 40,
                   child: OutlinedButton(
                     onPressed: (){
+                      showLoading(context);
+                      for (int i = 0; i < spAllWords.length; i++){
+                        if (isError){
 
-                      Navigator.of(context).pop();
+                          break;
+                        }
+                        if (spAllWords[i].wordId == 0){
+                          addNewWordUseCase.pressAddNewWord(widget.group.groupId,
+                              spAllWords[i].word,
+                              spAllWords[i].translate, (_){
+
+                              },
+                                  (String e)async{
+                                hideLoading(context);
+                                isError = true;
+                                showError(context, e);
+
+
+                              });
+                        }
+                        else if (spAllWords.any((element) => widget.spWords.contains(element))){
+                          continue;
+
+                        }
+                        else {
+                          updateUseCase.pressUpdateWord(spAllWords[i].wordId,
+                              spAllWords[i].word,
+                              spAllWords[i].translate, (_){
+
+                              },
+                                  (String e)async{
+                                hideLoading(context);
+                                isError = true;
+                                showError(context, e);
+
+
+                              });
+                        }
+                      }
+                      if (!isError){
+                        hideLoading(context);
+                        if (!mounted) return;
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => GroupPage(group: widget.group))).then((value) => setState(() {}));
+                      }
                     },
                     child: Icon(Icons.arrow_back, color: Colors.white,),
                     style: OutlinedButton.styleFrom(
                       padding: EdgeInsets.all(5),
-                      backgroundColor: Colors.blue.shade400,
+                      backgroundColor: Color(0xFF5AB6F4),
                       side: BorderSide(color: Colors.transparent)
                     ),
                   ),
                 ),
-                SizedBox(
-                  height: 40,
-
-                  child: FilledButton(
-
-                      style: FilledButton.styleFrom(
-                          backgroundColor: Colors.blue.shade400
-                      ),
-                      onPressed: ()async{
-                        showLoading(context);
-                        for (int i = 0; i < spAllWords.length; i++){
-                          if (isError){
-
-                            break;
-                          }
-                          if (spAllWords[i].wordId == 0){
-                            addNewWordUseCase.pressAddNewWord(widget.group.groupId,
-                                spAllWords[i].word,
-                                spAllWords[i].translate, (_){
-
-                                },
-                                    (String e)async{
-                                  hideLoading(context);
-                                  isError = true;
-                                  showError(context, e);
 
 
-                                });
-                          }
-                          else if (spAllWords.any((element) => widget.spWords.contains(element))){
-                            continue;
-
-                          }
-                          else {
-                            updateUseCase.pressUpdateWord(spAllWords[i].wordId,
-                                spAllWords[i].word,
-                                spAllWords[i].translate, (_){
-
-                                },
-                                    (String e)async{
-                                  hideLoading(context);
-                                  isError = true;
-                                  showError(context, e);
-
-
-                                });
-                        }
-                        }
-                        if (!isError){
-                          hideLoading(context);
-                          if (!mounted) return;
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => GroupPage(group: widget.group))).then((value) => setState(() {}));
-                        }
-
-                      }, child: Text('Done',
-                    style: TextStyle(
-                        fontWeight: FontWeight.w600
-                    ),)),
-                )
-              ],
             ),
 
             SizedBox(height: 40,),
@@ -192,7 +174,7 @@ class _EditWordsPageState extends State<EditWordsPage> {
                                 ),
                                 focusedBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(6),
-                                  borderSide: BorderSide(color: Colors.blue),),
+                                  borderSide: BorderSide(color: Color(0xFF5AB6F4),),),
                                 contentPadding: EdgeInsets.symmetric(vertical: 8, horizontal: 10),
                               )
                           ),),)
@@ -231,7 +213,7 @@ class _EditWordsPageState extends State<EditWordsPage> {
                                 ),
                                 focusedBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(6),
-                                  borderSide: BorderSide(color: Colors.blue),),
+                                  borderSide: BorderSide(color: Color(0xFF5AB6F4),),),
                                 contentPadding: EdgeInsets.symmetric(vertical: 8, horizontal: 10),
                               )
                           ),),)
@@ -252,12 +234,14 @@ class _EditWordsPageState extends State<EditWordsPage> {
                               setState(() {
                                 germanWord.clear();
                                 russianWord.clear();
+                                oldWordModel = WordModel(wordId: 0, word: '', translate: '', groupId: 0);
+                                isEdited = false;
                                 isValid = false;
                                 FocusScope.of(context).unfocus();
                               });
                             },
                             style: FilledButton.styleFrom(
-                                backgroundColor: Colors.blue
+                                backgroundColor: Color(0xFF5AB6F4),
                             ),
                             child: Text(
                                 "Delete word"
@@ -289,7 +273,7 @@ class _EditWordsPageState extends State<EditWordsPage> {
                               });
                             }:null,
                             style: FilledButton.styleFrom(
-                                backgroundColor: Colors.blue
+                                backgroundColor: Color(0xFF5AB6F4),
                             ),
                             child: Text(
                                 (isEdited)?"Edit word":"Add word"

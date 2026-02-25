@@ -17,7 +17,7 @@ class WordContainer extends StatelessWidget {
               width: double.infinity,
               padding: EdgeInsets.all(10),
               decoration: BoxDecoration(
-                  border: Border.all(color: Colors.grey),
+                  border: Border.all(color: Colors.transparent),
                   borderRadius: BorderRadius.circular(6),
                 color: Colors.white
               ),
@@ -53,7 +53,7 @@ class WordContainer extends StatelessWidget {
                         Container(
                           height: 1.5,
                           width: double.infinity,
-                          color: Colors.blue,
+                          color: Color(0xFF5AB6F4),
                         ),
 
                         const SizedBox(height: 6),
@@ -83,10 +83,10 @@ class WordContainer extends StatelessWidget {
 
                   (isEdit)?IconButton(
                     onPressed: onPressed,
-                    icon: const Icon(Icons.edit, color: Colors.blue,),
+                    icon: const Icon(Icons.edit, color: Color(0xFF5AB6F4),),
                   ):IconButton(
                     onPressed: onPressed,
-                    icon: const Icon(Icons.remove_red_eye_outlined, color: Colors.blue,),
+                    icon: const Icon(Icons.remove_red_eye_outlined, color: Color(0xFF5AB6F4),),
                   )
                 ],
               )

@@ -109,7 +109,7 @@ class _EditGroupNamePageState extends State<EditGroupNamePage> {
                     ),
                     focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(6),
-                      borderSide: BorderSide(color: Colors.blue),),
+                      borderSide: BorderSide(color:  Color(0xFF5AB6F4)),),
                     contentPadding: EdgeInsets.symmetric(vertical: 14, horizontal: 10),
                   )
               ),
@@ -140,7 +140,7 @@ class _EditGroupNamePageState extends State<EditGroupNamePage> {
                         showError(context, e);});
                     }:null,
                     style: FilledButton.styleFrom(
-                        backgroundColor: Colors.blue
+                        backgroundColor: Color(0xFF5AB6F4)
                     ),
                     child: Text(
                         "Save changes"

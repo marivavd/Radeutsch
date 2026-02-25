@@ -159,7 +159,7 @@ class _GroupPageState extends State<GroupPage> {
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Icon(Icons.collections_bookmark, color: Colors.blue),
+                Icon(Icons.collections_bookmark, color: Color(0xFF5AB6F4)),
                 Text(
                   ' ${spWords.length} ${spWords.length == 1 ? 'word' : 'words'}',
                   style: TextStyle(
@@ -180,7 +180,7 @@ class _GroupPageState extends State<GroupPage> {
                       Navigator.push(context, MaterialPageRoute(builder: (context) => LearnWordsPage(spWords:spWords,))).then((value) => setState(() {}));
                     },
                     style: FilledButton.styleFrom(
-                        backgroundColor: Colors.blue
+                        backgroundColor: Color(0xFF5AB6F4)
                     ),
                     child: Text(
                         "Learn this list",
@@ -201,7 +201,7 @@ class _GroupPageState extends State<GroupPage> {
               width: double.infinity,
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.only(topLeft: Radius.circular(20), topRight: Radius.circular(20)),
-                  color: Colors.blue
+                  color: Color(0xFFA2D6F9),
               ),
               child: Padding(
                 padding: EdgeInsetsGeometry.symmetric(horizontal: 25),
@@ -214,7 +214,7 @@ class _GroupPageState extends State<GroupPage> {
                       children: [
                         FilledButton(
                           style: FilledButton.styleFrom(
-                              backgroundColor: Colors.blue.shade400
+                              backgroundColor: Color(0xFF5AB6F4)
                           ),
                           onPressed: (){
                             Navigator.push(context, MaterialPageRoute(builder: (context) => EditWordsPage(spWords:spWords, group: widget.group))).then((value) => setState(() {}));
