@@ -24,6 +24,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
       body: [AllGroupsPage(), ThreeFormsPage(), VerbsWithPrepositionsPage(), ProfilePage()][index],
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Colors.white,
@@ -44,17 +45,17 @@ class _MyHomePageState extends State<MyHomePage> {
             fontSize: 12
         ),
         selectedLabelStyle: TextStyle(
-            color: Colors.blue,
+            color: Color(0xFF5AB6F4),
             fontWeight: FontWeight.w400,
             fontSize: 12
         ),
         showSelectedLabels: true,
         showUnselectedLabels: true,
         items: [
-          BottomNavigationBarItem(icon: SvgPicture.asset('assets/house.svg', color: (index == 0)?Colors.blue:Colors.grey,), label: "Home"),
-          BottomNavigationBarItem(icon: SvgPicture.asset('assets/3_forms.svg', color: (index == 1)?Colors.blue:Colors.grey,), label: "3 forms"),
-          BottomNavigationBarItem(icon: SvgPicture.asset('assets/preposition.svg', color: (index == 2)?Colors.blue:Colors.grey,), label: "Prepositions"),
-          BottomNavigationBarItem(icon: SvgPicture.asset('assets/profile.svg', color: (index == 3)?Colors.blue:Colors.grey,), label: "Profile"),
+          BottomNavigationBarItem(icon: SvgPicture.asset('assets/house.svg', color: (index == 0)?Color(0xFF5AB6F4):Colors.grey,), label: "Home"),
+          BottomNavigationBarItem(icon: SvgPicture.asset('assets/3_forms.svg', color: (index == 1)?Color(0xFF5AB6F4):Colors.grey,), label: "3 forms"),
+          BottomNavigationBarItem(icon: SvgPicture.asset('assets/preposition.svg', color: (index == 2)?Color(0xFF5AB6F4):Colors.grey,), label: "Prepositions"),
+          BottomNavigationBarItem(icon: SvgPicture.asset('assets/profile.svg', color: (index == 3)?Color(0xFF5AB6F4):Colors.grey,), label: "Profile"),
 
 
         ],
